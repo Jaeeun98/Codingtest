@@ -7,33 +7,46 @@
   </head>
   <body></body>
   <script>
-    //그림 속 나오는 인물의 그리움 점수를 모두 합산한 값 = 해당 사진의 추억 점수
+    //프로그래머스 Lv1 - 추억점수
+    //인물의 그리움 점수를 모두 합산한 값 = 해당 사진의 추억 점수
     //name = 그리워하는 사람의 이름
     //yearning = 사람별 그리움 점수 / 정수배열  > yearning[i]는 i번째 사람(name[i])의 그리움 점수입니다.
     //photo = 사진 속 인물 이름 / 이차원 문자열 배열
     //사진의 추억 점수를 주어진 순서대로 배열에 담아 리턴
 
     function solution(name, yearning, photo) {
-      var answer = [];
-
-      //photo 점수를 배열로 담아 리턴 > photo 반복문
-      photo.forEach((arr) => {
-        //photo 인물들의 그리움 점수 찾기
-        let sum = 0;
-        arr.forEach((people, i) => {
-          //photo 안에 있는 인물들의 그리움 점수를 합산
-
-          //people이 name의 몇 번째에 있는지 찾아야 함
-          const index = name.indexOf(people);
-
-          //yearning에서 해당 인덱스 번호의 숫자를 찾음, sum에 추가
-          sum += yearning[index] || 0;
-        });
-        //answer 배열에 점수 넣음
-        answer.push(sum);
+      // name과 yearning을 객체로 변환하여 탐색을 최적화
+      const yearningMap = {};
+      name.forEach((n, i) => {
+        yearningMap[n] = yearning[i];
       });
-      return answer;
+
+      return photo.map((arr) =>
+        arr.reduce((sum, person) => sum + (yearningMap[person] || 0), 0)
+      );
     }
+
+    // function solution(name, yearning, photo) {
+    //   var answer = [];
+
+    //   //photo 점수를 배열로 담아 리턴 > photo 반복문
+    //   photo.forEach((arr) => {
+    //     //photo 인물들의 그리움 점수 찾기
+    //     let sum = 0;
+    //     arr.forEach((people, i) => {
+    //       //photo 안에 있는 인물들의 그리움 점수를 합산
+
+    //       //people이 name의 몇 번째에 있는지 찾아야 함
+    //       const index = name.indexOf(people);
+
+    //       //yearning에서 해당 인덱스 번호의 숫자를 찾음, sum에 추가
+    //       sum += yearning[index] || 0;
+    //     });
+    //     //answer 배열에 점수 넣음
+    //     answer.push(sum);
+    //   });
+    //   return answer;
+    // }
 
     solution(
       ["may", "kein", "kain", "radi"],
