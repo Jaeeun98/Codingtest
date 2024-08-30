@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - 빈도수세기
+
+    function validAnagram(str1, str2) {
+      //두 개의 객체를 만들어서 각 알파벳 개수를 비교
+
+      //두 문자열의 길이가 다르면 false
+      if (str1.length !== str2.length) return false;
+
+      const obj1 = {};
+      const obj2 = {};
+
+      for (const key of str1) {
+        //개수 추가 > +1
+        //key가 없다면 +1, key가 이미 있다면 해당 값에 +1
+        obj1[key] = (obj1[key] || 0) + 1;
+      }
+
+      for (const key of str2) {
+        //개수 추가 > +1
+        //key가 없다면 +1, key가 이미 있다면 해당 값에 +1
+        obj2[key] = (obj2[key] || 0) + 1;
+      }
+      console.log(obj1, obj2);
+
+      for (const key in obj1) {
+        //obj1에 있는 key가 obj2에 없다면 false
+        if (!obj2[key]) return false;
+        console.log("key", key);
+
+        //obj1에 있는 값이 obj2에 있는 값이랑 동일하지 않으면 false
+        if (obj1[key] !== obj2[key]) return false;
+      }
+      return true;
+    }
+
+    console.log(validAnagram("anagram", "nagaram"));
+  </script>
+</html>
