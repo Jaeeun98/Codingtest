@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - sameFrequency
+    //두 개의 양의 정수가 주어졌을 때, 두 숫자의 자릿수가 같은 빈도를 갖는지 구하시오.
+    function sameFrequency(num1, num2) {
+      //각 숫자의 빈도수가 같으면 true, 아니면 false
+
+      //숫자를 string으로 변경 > 반복문 사용하기 위해
+      const str1 = num1.toString();
+      const str2 = num2.toString();
+
+      //str1 obj안에 넣어서 빈도수 체크
+      const obj = {};
+
+      for (const number of str1) {
+        obj[number] = (obj[number] || 0) + 1;
+      }
+
+      //str2 반복문 > key 확인해서 해당 글자가 있으면 str1에서 빈도수 하나씩 줄이기
+      //만약 key가 없다면 false
+      //0인데 또 key가 있으면 false
+      for (const key of str2) {
+        if (!obj[key]) return false;
+        else {
+          obj[key] = obj[key] - 1;
+        }
+      }
+      return true;
+    }
+
+    console.log(sameFrequency(22, 222));
+  </script>
+</html>
