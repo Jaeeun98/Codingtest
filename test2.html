@@ -29,12 +29,10 @@
         //key가 없다면 +1, key가 이미 있다면 해당 값에 +1
         obj2[key] = (obj2[key] || 0) + 1;
       }
-      console.log(obj1, obj2);
 
       for (const key in obj1) {
         //obj1에 있는 key가 obj2에 없다면 false
         if (!obj2[key]) return false;
-        console.log("key", key);
 
         //obj1에 있는 값이 obj2에 있는 값이랑 동일하지 않으면 false
         if (obj1[key] !== obj2[key]) return false;

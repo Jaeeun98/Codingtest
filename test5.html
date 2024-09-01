@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - areThereDuplicates
+    //가변적인 수의 인수를 받아들이고 전달된 인자 중 중복이 있는지 확인하는 함수를 구현하시오.
+
+    //가변적인 수의 인수 = arguments 객체 사용
+    function areThereDuplicates(...args) {
+      const obj = {};
+
+      for (const item of args) {
+        if (obj[item]) return true;
+        else obj[item] = 1;
+      }
+
+      return false;
+    }
+
+    console.log(areThereDuplicates(1, 2, 3));
+  </script>
+</html>
