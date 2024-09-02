@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - isSubsequence
+    //두 문자열을 받아, 첫 번째 문자열의 문자가 두 번째 문자열의 문자 일부에 포함되는지 확인하시오
+    //있으면 true, 없으면 false
+    //첫 번째 문자열 순서는 바뀌면 안됨
+    function isSubsequence(str1, str2) {
+      if (str1.length === 0) return true;
+
+      //str1
+      let p1 = 0;
+
+      for (const str of str2) {
+        //str1, str2 비교
+        //같으면 p1++ > p1이 str1.length와 같으면 true
+        //다르면 그냥 str2만 +
+
+        if (str1[p1] === str) {
+          if (p1 === str1.length - 1) return true;
+          else p1++;
+        }
+      }
+      return false;
+    }
+
+    console.log(isSubsequence("abc", "acb"));
+  </script>
+</html>
