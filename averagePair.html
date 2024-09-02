@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - averagePair
+    //정렬된 정수 배열과 목표 평균이 주어짐, 배열의 두 속성의 평균값이 목표 평균이랑 같은지 확인
+    //같으면 true, 아니면 false
+    //시간복잡도 O(n)
+    function averagePair(arr, avg) {
+      //하나씩 전체 요소와의 평균값을 구해서 같으면 true, 없으면 false 내보냄
+      //while문 > 조건을 길이로 할 수 없으니
+      //각 요소의 인덱스(위치)를 나타내는 p1과 p2가 있음, p2가 움직이면서 하나씩 요소 비교
+      //p1의 값이 배열의 길이-1이랑 같아지면 종료
+
+      let p1 = 0;
+      let p2 = 1;
+
+      let breakNum = 1;
+
+      while (p1 < arr.length - 1) {
+        if ((arr[p1] + arr[p2]) / 2 === avg) return true;
+        else {
+          p2++;
+
+          //p2가 이미 끝까지 한 번 돌았으면 p1을 옮겨서 다시 돌아야 함
+          if (p2 === arr.length) {
+            p1++;
+            p2 = p1 + 1;
+          }
+        }
+        breakNum++;
+      }
+
+      return false;
+    }
+
+    console.log(averagePair([1, 2, 3], 2.5));
+  </script>
+</html>
