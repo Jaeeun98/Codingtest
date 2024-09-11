@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - 재귀함수, reverse
+    //주어진 문자열의 역순인 문자열을 반환하는 함수를 만드시오.
+
+    function reverse(str) {
+      if (str.length <= 1) return str;
+      return reverse(str.slice(1)) + str[0];
+    }
+    console.log(reverse("awesome"));
+
+    //    function reverse(str) {
+    //       let resultStr = "";
+    //       let cnt = str.length;
+
+    //       function helper(cnt) {
+    //         if (cnt === 0) return;
+
+    //         resultStr += str[cnt - 1];
+    //         helper(cnt - 1);
+    //       }
+
+    //       helper(cnt);
+
+    //       return resultStr;
+    //     }
+    //     console.log(reverse("awesome"));
+  </script>
+</html>
