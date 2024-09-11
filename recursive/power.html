@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - 재귀함수, power
+    //밑과 지수 두 가지 변수를 받아 밑의 거듭제곱(지수)을 반환하는 함수를 작성하시오
+    //2, 4 > 2^4
+    //Math.pow() 모방,  > base를 exponent 만큼 곱하기!
+    function power(base, exponent) {
+      console.log(exponent);
+      if (exponent === 0) return 1;
+      return base * power(base, exponent - 1);
+    }
+    console.log(power(2, 4));
+  </script>
+</html>
