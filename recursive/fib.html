@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - 재귀함수, fib
+    //피보나치 수열의 n번째 숫자를 반환하는 재귀함수를 작성하시오.
+    //피보나치 수열 = 이전 두 수의 합과 같음
+    // x+y=sum
+    // 0+1 = 1
+    // 1+1 = 2
+    // 1+2 = 3
+    // 2+3 = 5
+
+    function fib(num) {
+      let x = 1;
+      let y = 0;
+      let sum = 1;
+
+      let i = 1;
+
+      function helper(helperNum) {
+        if (helperNum === 1) return 1;
+
+        x = y;
+        y = sum;
+        sum = x + y;
+        helper(helperNum - 1);
+      }
+
+      helper(num);
+      return sum;
+    }
+    console.log(fib(10));
+  </script>
+</html>
