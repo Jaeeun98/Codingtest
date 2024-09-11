@@ -12,7 +12,6 @@
     //2, 4 > 2^4
     //Math.pow() 모방,  > base를 exponent 만큼 곱하기!
     function power(base, exponent) {
-      console.log(exponent);
       if (exponent === 0) return 1;
       return base * power(base, exponent - 1);
     }
