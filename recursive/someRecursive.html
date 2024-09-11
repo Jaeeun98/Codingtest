@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - 재귀함수, someRecursive
+    //배열의 값이 콜백에 전달되었을 때 true를 반환하면 true 아니면 false를 출력하시오.
+    //배열 안에 있는 값 하나하나가 콜백 함수로 전달되어야 함
+    const isOdd = (val) => val % 2 !== 0;
+
+    function someRecursive(arr, callback) {
+      if (arr.length === 0) return false;
+      if (callback(arr[0])) return true;
+
+      return someRecursive(arr.slice(1), callback);
+    }
+
+    console.log(someRecursive([11, 1, 2, 3, 4], (val) => val > 10));
+  </script>
+</html>
