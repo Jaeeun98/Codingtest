@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //강의 - 재귀함수, isPalindrome
+    //전달된 문자열이 앞으로 읽으나 뒤로 읽으나 동일한 문자인 경우 true를, 아니면 false를 반환하는 재귀 함수를 만드시오.
+    //맨 앞 글자와 맨 뒷 글자의 값이 같은지 확인
+
+    //솔루션
+    function isPalindrome(str) {
+      if (str.length === 1) return true;
+      if (str.length === 2) return str[0] === str[1];
+      if (str[0] === str.slice(-1)) return isPalindrome(str.slice(1, -1));
+      return false;
+    }
+    //조건을 좀 더 세분화 했음!
+
+    // //내코드
+    // function isPalindrome(str) {
+    //   //앞글자와 뒷 글자 체크
+    //   //값이 다르면 바로 return false
+    //   //같으면 앞, 뒷글자 삭제한 후 함수 호출
+    //   //length가 1보다 작으면 return
+    //   if (str.length <= 1) return true;
+    //   if (str[0] !== str[str.length - 1]) return false;
+
+    //   return isPalindrome(str.slice(1, str.length - 1));
+    // }
+    // console.log(isPalindrome("awesome"));
+  </script>
+</html>
