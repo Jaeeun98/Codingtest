@@ -10,38 +10,26 @@
 
 const fs = require("fs");
 const input = fs.readFileSync("./index.txt").toString().trim().split("\n");
+const [N, M] = input[0].split(" ").map(Number);
 
-const [N, M] = input[0].split(" ");
+// 노래 정보를 추출하여 첫 세 음을 기준으로 객체로 저장
+const songs = input.slice(1, N + 1).map((line) => {
+  const [_, title, ...notes] = line.split(" ");
+  return { title, firstThreeNotes: notes.slice(0, 3).join(" ") };
+});
 
-const songs = [];
-for (let i = 1; i <= N; i++) {
-  const [len, title, ...notes] = input[i].split(" ");
-  songs.push({
-    len,
-    title,
-    notes: notes.slice(0, 3).join(" "),
-  });
+// 특정 음에 대한 노래 제목을 찾는 함수
+function findSongTitle(firstThreeNotes) {
+  const matches = songs.filter(
+    (song) => song.firstThreeNotes === firstThreeNotes
+  );
+  if (matches.length === 0) return "!";
+  if (matches.length === 1) return matches[0].title;
+  return "?";
 }
 
-const attempts = [];
+// 맞히기를 시도하는 각 노래의 첫 세 음에 대한 결과를 생성
+const attempts = input.slice(N + 1, N + 1 + M).map(findSongTitle);
 
-for (let i = 1; i <= M; i++) {
-  const firstThreeNotes = input[i + Number(N)];
-  const result = {
-    title: "",
-    cnt: 0,
-  };
-
-  songs.forEach((song) => {
-    if (song.notes === firstThreeNotes) {
-      result.title = song.title;
-      result.cnt += 1;
-    }
-  });
-
-  if (result.cnt === 0) attempts.push("!");
-  else if (result.cnt === 1) attempts.push(result.title);
-  else attempts.push("?");
-}
-
+// 결과 출력
 console.log(attempts.join("\n"));
