@@ -41,44 +41,29 @@
 const fs = require("fs");
 const input = fs.readFileSync("./index.txt").toString().trim().split("\n");
 
-const N = input[0];
+const N = parseInt(input[0], 10); // 주의 개수
 
-const TIME = {
-  1: 4,
-  2: 6,
-  3: 4,
-  4: 10,
-};
-
-let timeKey = 1; //근무시간 key
+const TIME = [4, 5, 4, 10];
 
 let schedule = new Map();
 
 for (let i = 1; i <= N * 4; i++) {
   const weekSchedule = input[i].split(" ");
-  const addTime = TIME[timeKey];
+  const addTime = TIME[(i - 1) % 4]; // 4시간대 반복 순환
 
   weekSchedule.forEach((name) => {
     if (name === "-") return;
-    //name이 있는지 확인 > 있으면 +, 없으면 value
-    const preValue = schedule.get(name) || 0;
-    let value = preValue ? preValue + addTime : addTime;
-    schedule.set(name, value);
-  });
 
-  //timeKey 초기화
-  if (timeKey !== 4) timeKey++;
-  else timeKey = 1;
+    const preValue = schedule.get(name) || 0;
+    schedule.set(name, preValue + addTime);
+  });
 }
 
 let times = [...schedule.values()];
-if (times.length === 0) {
-  // 아무도 근무하지 않는 경우
-  result = "Yes";
-} else {
-  const max = Math.max(...times);
-  const min = Math.min(...times);
 
-  result = max - min > 12 ? "No" : "Yes";
-}
+// 결과 계산
+const result =
+  times.length === 0 || Math.max(...times) - Math.min(...times) <= 12
+    ? "Yes"
+    : "No";
 console.log(result);
