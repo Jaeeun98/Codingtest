@@ -11,23 +11,26 @@
 const fs = require("fs");
 const input = fs.readFileSync("./index.txt").toString().trim().split("\n");
 
-const N = Number(input[0]);
 const strArr = input.slice(1);
+const seen = new Set(strArr);
+
+let result = "";
 
 function handleReverse(str) {
-  return str.split("").reverse().join("") || "";
+  return str.split("").reverse().join("");
 }
 
-//자신을 뒤집었을 때,똑같은게 있는지 체크
-let result = strArr.filter((str) => str === handleReverse(str))[0];
+// 회문 및 역순 문자열 확인
+for (const str of strArr) {
+  const reversedStr = handleReverse(str);
 
-//글 목록 중에, 똑같은게 있는지 체크
-strArr.forEach((str, i) => {
-  for (let j = i + 1; j < N; j++) {
-    if (strArr[j] === handleReverse(str)) result = str;
+  // 회문이거나 역순 문자열이 Set에 있는지 확인
+  if (str === reversedStr || seen.has(reversedStr)) {
+    result = str;
+    break;
   }
-});
+}
 
-//길이, 가운데 숫자 리턴
+// 길이와 가운데 글자 출력
 const len = result.length;
 console.log(len, result[Math.floor(len / 2)]);
