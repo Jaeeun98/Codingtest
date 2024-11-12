@@ -18,14 +18,10 @@ const N = Number(input);
 const answer = [];
 const arr = Array.from({ length: N }, (_, i) => i + 1);
 
-const handleShuffle = (arr) => {
-  while (arr.length > 0) {
-    answer.push(arr.shift());
+while (arr.length > 0) {
+  answer.push(arr.shift());
 
-    if (arr.length > 0) arr.push(arr.shift());
-  }
-};
-
-handleShuffle(arr);
+  if (arr.length) arr.push(arr.shift());
+}
 
 console.log(answer.join(" "));
