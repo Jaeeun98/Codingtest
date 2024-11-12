@@ -19,18 +19,11 @@ const answer = [];
 const arr = Array.from({ length: N }, (_, i) => i + 1);
 
 const handleShuffle = (arr) => {
-  if (arr.length === 1) {
-    answer.push(arr[0]);
-    return;
+  while (arr.length > 0) {
+    answer.push(arr.shift());
+
+    if (arr.length > 0) arr.push(arr.shift());
   }
-
-  //0번째 값을 answer에 넣기
-  answer.push(arr[0]);
-
-  //값을 바꿔서 다시 호출
-  const nextArr = arr.slice(2); //카드 버리기
-  nextArr.push(arr[1]); //앞에 있는 카드를 뒤로 옮기기
-  handleShuffle(nextArr);
 };
 
 handleShuffle(arr);
