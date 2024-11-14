@@ -17,7 +17,8 @@ const fs = require("fs");
 const input = fs.readFileSync("./index.txt").toString().trim().split("\n");
 
 const arr = input.slice(1);
-const waitLine = [];
+
+let waitLen = 0;
 let maxLen = 0;
 let lastStudentNumber = -1;
 
@@ -30,16 +31,18 @@ let lastStudentNumber = -1;
 arr.forEach((A) => {
   const [type, number] = A.split(" ");
 
-  if (type == 1) waitLine.push(number);
-  else if (waitLine.length > 0) waitLine.shift();
+  if (type == 1) {
+    waitLen++;
 
-  const waitLen = waitLine.length;
-
-  if (waitLen > maxLen) {
-    maxLen = waitLen;
-    lastStudentNumber = waitLine[waitLen - 1];
-  } else if (waitLen === maxLen && waitLine[waitLen - 1] < lastStudentNumber)
-    lastStudentNumber = waitLine[waitLen - 1];
+    if (waitLen > maxLen) {
+      maxLen = waitLen;
+      lastStudentNumber = number;
+    } else if (waitLen === maxLen) {
+      lastStudentNumber = Math.min(lastStudentNumber, number);
+    }
+  } else {
+    if (waitLen > 0) waitLen--;
+  }
 });
 
 console.log(maxLen, lastStudentNumber);
