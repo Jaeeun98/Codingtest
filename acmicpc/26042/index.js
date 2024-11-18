@@ -22,12 +22,6 @@ let waitLen = 0;
 let maxLen = 0;
 let lastStudentNumber = -1;
 
-/**
- * type = 1이면, 학생번호를 waitingLine에 추가
- * type = 2면, waitingLine 맨 앞 빼기
- * 한 줄이 끝날때마다
- */
-
 arr.forEach((A) => {
   const [type, number] = A.split(" ");
 
