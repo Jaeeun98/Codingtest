@@ -1,17 +1,14 @@
+//각 행에서 가장 큰 값을 삭제
+//삭제된 값 중 가장 큰 값을 답에 더함
+
 const handleDelete = (grid) => {
-  console.log("ddd");
   const maxArr = [];
-
   for (let i = 0; i < grid.length; i++) {
-    //가장 큰 값 삭제
-    const max = Math.max(...grid[i]);
-    const idx = grid[i].indexOf(max);
-    console.log(idx);
-
-    maxArr.push(max);
-    grid[i].splice(idx, 1); //grid 각 행마다 가장 큰 값 삭제
+    //각 행에서 가장 큰 값 삭제
+    const maxNumber = grid[i].pop();
+    maxArr.push(maxNumber);
   }
-  //다 돌면 그 값 중 가장 큰 값 리턴
+
   return Math.max(...maxArr);
 };
 
@@ -19,8 +16,10 @@ const deleteGreatestValue = function (grid) {
   let sum = 0;
   const n = grid[0].length;
 
-  //gird가 비어있을때까지 반복
-  //답에 더하기
+  //오름차순 정렬
+  grid.forEach((row) => row.sort((a, b) => a - b));
+
+  //for문 돌면서 각 행에서 가장 큰 값 삭제
   for (let i = 0; i < n; i++) sum += handleDelete(grid);
 
   return sum;
