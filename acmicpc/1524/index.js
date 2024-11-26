@@ -25,36 +25,15 @@ const T = Number(input[0][0]); //반복 횟수
 
 const win = []; //승자, 출력
 
-//세빈, 세준 병사 힘 내림차순  정렬
+//세빈, 세준 병사 중 가장 강한 검사 체크
+for (let i = 1; i <= T; i++) {
+  const [_, sejunSoldier, sebiSoldier] = input[i];
 
-//맨 뒤에 있는 것(가장 약한 병사)들끼리 싸움
-//더 약한 병사 > pop()
-//같으면 세비 병사 pop()
-//둘 중 하나의 병사가 남아있을때까지 반복
-for (let i = 1; i < T + 1; i++) {
-  const testCase = input[i];
+  const sejunMax = Math.max(...sejunSoldier.split(" ").map(Number));
+  const sebiMax = Math.max(...sebiSoldier.split(" ").map(Number));
 
-  const soldierPower1 = testCase[1]
-    .split(" ")
-    .map(Number)
-    .sort((a, b) => b - a); // 세준
-
-  const soldierPower2 = testCase[2]
-    .split(" ")
-    .map(Number)
-    .sort((a, b) => b - a); // 세비
-
-  while (soldierPower1.length > 0 && soldierPower2.length > 0) {
-    const weakest1 = soldierPower1[soldierPower1.length - 1];
-    const weakest2 = soldierPower2[soldierPower2.length - 1];
-
-    if (weakest1 < weakest2) soldierPower1.pop();
-    else soldierPower2.pop();
-  }
-
-  if (soldierPower1.length === 0) win.push("B");
-  else if (soldierPower2.length === 0) win.push("S");
-  else win.push("C");
+  if (sejunMax < sebiMax) win.push("B");
+  else win.push("S");
 }
 
 console.log(win.join("\n"));
