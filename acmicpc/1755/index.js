@@ -23,26 +23,22 @@ const input = fs.readFileSync("./index.txt").toString().trim().split(" ");
 
 const [M, N] = input.map((num) => Number(num));
 
-const strMap = new Map();
+const numberToEnglish = (num) =>
+  num
+    .toString()
+    .split("")
+    .map((digit) => en[digit])
+    .join("");
 
-for (let i = M; i <= N; i++) {
-  //i를 나누기 > 두 자리수면 하나하나 넣어야 함
-  const numArr = i.toString().split("");
-
-  //영어로 치환
-  const str = numArr.map((num) => en[num]).join("");
-  strMap.set(str, i);
-}
+const numToEnMap = new Map();
+for (let i = M; i <= N; i++) numToEnMap.set(numberToEnglish(i), i);
 
 //정렬
-const sortArr = [...strMap.keys()].sort();
+const sortedNumbers = [...numToEnMap.keys()]
+  .sort()
+  .map((en) => numToEnMap.get(en));
 
-//다시 숫자로 치환
-const result = sortArr.map((en) => strMap.get(en));
-
-for (let i = 0; i < result.length; i += 10) {
-  console.log(result.slice(i, i + 10).join(" "));
+//출력
+for (let i = 0; i < sortedNumbers.length; i += 10) {
+  console.log(sortedNumbers.slice(i, i + 10).join(" "));
 }
-// console.log(sortArr);
-// console.log(strMap);
-// console.log(result);
